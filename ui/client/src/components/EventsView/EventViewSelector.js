@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const EventsViewSelector = ({ items, selected, onRowClick }) => {
+const EventsViewSelector = ({ items, selected, onRowClick, deploymentId }) => {
   const classes = useStyles();
   const tableConfig = useMemo(() => ({
     row: {
@@ -53,8 +53,8 @@ const EventsViewSelector = ({ items, selected, onRowClick }) => {
       {
         name: 'logs',
         header: (name) => <TableCell>{name}</TableCell>,
-        cell: (row) => {          
-          return <ContainersLogs podName={row.name} />
+        cell: (row) => {
+          return <ContainersLogs podName={row.name} deploymentId={deploymentId} />
         },
       },
       {
@@ -78,6 +78,7 @@ EventsViewSelector.propTypes = {
   })),
   selected: PropTypes.number,
   onRowClick: PropTypes.func,
+  deploymentId: PropTypes.string.isRequired
 };
 
 EventsViewSelector.defaultProps = {
